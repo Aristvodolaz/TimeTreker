@@ -14,7 +14,7 @@ public class HeadActivity extends BaseActivity{
     @Override
     protected void initViews(@Nullable Bundle saveInstanceState) {
         replaceFragment(StartFragment.newInstance(), true);
-        //test commit for new dev
+        //test commit for new devv
     }
 
     @Override
