@@ -13,6 +13,7 @@ import butterknife.BindView;
 
 import java.util.EnumMap;
 import java.util.Map;
+import android.os.Handler;
 
 public class GenerationQrForVyhodFragment extends BaseFragment {
     public static final String NUM_CORPUS = "corpus";
@@ -27,11 +28,30 @@ public class GenerationQrForVyhodFragment extends BaseFragment {
 
     @BindView(R.id.qrcode)
     ImageView qrCode;
+    @BindView(R.id.back_arrow) ImageView backArrow;
+
+    private Handler qrCodeUpdateHandler;
+    private static final long QR_CODE_UPDATE_INTERVAL = 5 * 60 * 1000; // 5 минут в миллисекундах
 
     @Override
     protected void initViews() {
         super.initViews();
 
+        qrCodeUpdateHandler = new Handler();
+        updateQRCode();
+
+        qrCodeUpdateHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateQRCode();
+                qrCodeUpdateHandler.postDelayed(this, QR_CODE_UPDATE_INTERVAL);
+            }
+        }, QR_CODE_UPDATE_INTERVAL);
+
+        backArrow.setOnClickListener(l->{getActivity().getSupportFragmentManager().popBackStack();});
+    }
+
+    private void updateQRCode() {
         String building = getArguments().getBoolean(NUM_CORPUS, true) ? "Корпус 1" : "Корпус 2";
         String exit = "Выход";
         String qrCodeData = building + "|" + exit;
@@ -72,5 +92,14 @@ public class GenerationQrForVyhodFragment extends BaseFragment {
     @Override
     protected int layoutId() {
         return R.layout.generation_code_for_vyhod;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (qrCodeUpdateHandler != null) {
+            qrCodeUpdateHandler.removeCallbacksAndMessages(null);
+            qrCodeUpdateHandler = null;
+        }
     }
 }
