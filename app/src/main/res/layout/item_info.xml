@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
+        android:gravity="center"
         android:id="@+id/date"
         android:layout_weight="1"
         android:textColor="@color/black"
@@ -16,14 +17,17 @@
         android:textSize="14sp"
         android:text="19.10.2023 |" />
     <TextView
+        android:background="@drawable/background_for_info"
+        android:gravity="center"
         android:id="@+id/corpus"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Корпус 1"
         android:textSize="14sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/white"/>
     <TextView
+        android:gravity="center"
         android:id="@+id/full_time"
         android:layout_weight="1"
         android:layout_width="0dp"
@@ -32,11 +36,13 @@
         android:textSize="14sp"
         android:textColor="@color/black"/>
     <TextView
+        android:background="@drawable/background_for_info"
+        android:gravity="center"
         android:id="@+id/ot_do"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="09:15 ... 12:45"
         android:textSize="14sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/white"/>
 </LinearLayout>
