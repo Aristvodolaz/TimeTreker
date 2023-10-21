@@ -3,16 +3,15 @@ package com.example.timetrekerforandroid.fragment.head;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
-
 import com.example.timetrekerforandroid.R;
 import com.example.timetrekerforandroid.fragment.BaseFragment;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
 import java.util.EnumMap;
 import java.util.Map;
+import android.os.Handler;
 
 import butterknife.BindView;
 
@@ -27,13 +26,32 @@ public class GenerationQrForVhodFragment extends BaseFragment {
         return fragment;
     }
 
-    @BindView(R.id.qrcode)
-    ImageView qrCode;
+    @BindView(R.id.qrcode) ImageView qrCode;
+    @BindView(R.id.back_arrow) ImageView backArrow;
+    private Handler qrCodeUpdateHandler;
+    private static final long QR_CODE_UPDATE_INTERVAL = 5 * 60 * 1000;
 
     @Override
     protected void initViews() {
         super.initViews();
 
+        qrCodeUpdateHandler = new Handler();
+        updateQRCode();
+
+        // Регулярно обновляем QR-код каждые 5 минут
+        qrCodeUpdateHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateQRCode();
+                qrCodeUpdateHandler.postDelayed(this, QR_CODE_UPDATE_INTERVAL);
+            }
+        }, QR_CODE_UPDATE_INTERVAL);
+
+        backArrow.setOnClickListener(l->{getActivity().getSupportFragmentManager().popBackStack();});
+
+    }
+
+    private void updateQRCode() {
         String building = getArguments().getBoolean(NUM_CORPUS, true) ? "Корпус 1" : "Корпус 2";
         String exit = "Вход";
         String qrCodeData = building + "|" + exit;
@@ -74,5 +92,14 @@ public class GenerationQrForVhodFragment extends BaseFragment {
     @Override
     protected int layoutId() {
         return R.layout.generation_code_for_vhod;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (qrCodeUpdateHandler != null) {
+            qrCodeUpdateHandler.removeCallbacksAndMessages(null);
+            qrCodeUpdateHandler = null;
+        }
     }
 }
