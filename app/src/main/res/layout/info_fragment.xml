@@ -8,9 +8,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+        app:cardBackgroundColor="#00FFFFFF"
         app:cardElevation="50sp">
         <LinearLayout
+            android:background="@drawable/card_drawable"
             android:layout_marginBottom="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="Сегодня 19 октября 2023"/>
             <LinearLayout
+                android:layout_marginBottom="16sp"
                 android:layout_marginTop="12sp"
                 android:layout_marginRight="16sp"
                 android:layout_marginLeft="16sp"
