@@ -26,15 +26,16 @@
         <activity android:name=".activity.HeadActivity" />
         <activity android:name=".activity.UserActivity" />
         <activity android:name=".activity.CameraActivity" />
-        <activity android:name=".activity.SplashScreenActivity" />
-        <activity android:name=".activity.LoginActivity"  android:screenOrientation="portrait"
+        <activity android:name=".activity.SplashScreenActivity"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
+        <activity android:name=".activity.LoginActivity"  android:screenOrientation="portrait"
+            android:exported="true"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
