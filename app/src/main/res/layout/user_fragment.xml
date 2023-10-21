@@ -2,9 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/gray">
     <androidx.cardview.widget.CardView
+        android:layout_width="400dp"
+        android:layout_height="210dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="7dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:id="@+id/name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="4dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:id="@+id/university"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="4dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:id="@+id/group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="4dp"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></androidx.cardview.widget.CardView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/exit"
+            android:drawableLeft="@drawable/exit"
+            android:drawablePadding="8sp"
+            android:background="@drawable/btn_circle_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="15sp"
+            android:gravity="left|center"
+            android:text="Выход" />
+    </LinearLayout>
+
 </LinearLayout>
